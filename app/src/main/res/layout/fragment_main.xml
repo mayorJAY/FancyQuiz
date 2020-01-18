@@ -1,130 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
     tools:context=".MainFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/title_tv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="@string/hello_blank_fragment"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:textSize="36sp"/>
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/select_number_tv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="Select Total Number of Questions"
-        android:textSize="24sp"/>
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_tv" />
 
     <LinearLayout
+        android:id="@+id/number_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="60dp"
+        android:weightSum="5"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="4dp">
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/select_number_tv">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/ten"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
             android:text="10"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"/>
-        <Button
+            app:backgroundTint="#6E6E6E"
+            app:cornerRadius="24dp" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/twenty"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:layout_height="match_parent"
             android:text="20"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"/>
-        <Button
+            app:backgroundTint="#6E6E6E"
+            app:cornerRadius="24dp" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/thirty"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:layout_height="match_parent"
             android:text="30"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"/>
-        <Button
+            app:backgroundTint="#6E6E6E"
+            app:cornerRadius="24dp" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/forty"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:layout_height="match_parent"
             android:text="40"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"/>
-        <Button
+            app:backgroundTint="#6E6E6E"
+            app:cornerRadius="24dp" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/fifty"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:layout_height="match_parent"
             android:text="50"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"/>
+            app:backgroundTint="#6E6E6E"
+            app:cornerRadius="24dp" />
 
     </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="16dp"
-        android:text="Select Difficulty"
-        android:textSize="24sp" />
-
-    <LinearLayout
+        android:id="@+id/select_difficulty_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="4dp">
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Select Difficulty"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/number_layout" />
 
-        <Button
+    <LinearLayout
+        android:id="@+id/difficulty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:weightSum="4"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/select_difficulty_tv">
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/any"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
             android:text="Any"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"/>
-        <Button
+            app:backgroundTint="#6E6E6E"
+            app:cornerRadius="24dp" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/easy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
             android:text="Easy"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"/>
-        <Button
+            app:backgroundTint="#6E6E6E"
+            app:cornerRadius="24dp" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
             android:text="Medium"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"/>
-        <Button
+            app:backgroundTint="#6E6E6E"
+            app:cornerRadius="24dp" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/hard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
             android:text="Hard"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"/>
+            app:backgroundTint="#6E6E6E"
+            app:cornerRadius="24dp" />
 
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/start_quiz"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start Quiz"
-        android:layout_marginStart="150dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="36dp"/>
+        android:layout_marginRight="8dp"
+        android:text="Start Quiz"
+        android:textStyle="bold"
+        app:backgroundTint="#40B4E9"
+        app:cornerRadius="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/difficulty_layout" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

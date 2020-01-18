@@ -24,44 +24,22 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView quizCategory = findViewById(R.id.quiz_category);
         quizCategory.setHasFixedSize(true);
         quizCategory.setLayoutManager(new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false));
-        quizCategory.setAdapter(new CategoryAdapter());
+        CategoryAdapter categoryAdapter = new CategoryAdapter();
+        quizCategory.setAdapter(categoryAdapter);
         int largePadding = getResources().getDimensionPixelSize(R.dimen.grid_spacing_large);
         int smallPadding = getResources().getDimensionPixelSize(R.dimen.grid_spacing_small);
         quizCategory.addItemDecoration(new GridItemDecoration(largePadding, smallPadding));
+        categoryAdapter.setOnItemClickListener(onItemClickListener);
     }
 
-    private class CategoryAdapter extends RecyclerView.Adapter<CategoryViewHolder>{
-
-        @NonNull
+    private View.OnClickListener onItemClickListener = new View.OnClickListener() {
         @Override
-        public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new CategoryViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.quiz_category_view, parent, false));
+        public void onClick(View v) {
+            RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
+            //int position = viewHolder.getAdapterPosition();
+            displayFragment();
         }
-
-        @Override
-        public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-            holder.quizImage.setImageResource(R.drawable.ic_music_note_24dp);
-            holder.quizName.setText("Music");
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return 20;
-        }
-    }
-
-    private class CategoryViewHolder extends RecyclerView.ViewHolder{
-        ImageView quizImage;
-        TextView quizName;
-
-        CategoryViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            quizImage = itemView.findViewById(R.id.quiz_image);
-            quizName = itemView.findViewById(R.id.quiz_name);
-        }
-    }
+    };
 
     public void displayFragment(){
         // Instantiate the fragment (SimpleFragment)

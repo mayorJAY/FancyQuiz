@@ -11,14 +11,15 @@
         android:id="@+id/select_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:text="Select Category"
         android:textStyle="bold"
         android:textColor="#ffffff"
-        android:textSize="24sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/quiz_category"
@@ -40,8 +41,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.60"
         tools:layout="@layout/fragment_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

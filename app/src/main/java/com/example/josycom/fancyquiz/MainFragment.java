@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 /**
@@ -31,18 +32,21 @@ public class MainFragment extends Fragment {
         final Button buttonTen = rootView.findViewById(R.id.ten);
         final Button buttonEasy = rootView.findViewById(R.id.easy);
         final Button buttonStart = rootView.findViewById(R.id.start_quiz);
+        final TextView titleTextView = rootView.findViewById(R.id.title_tv);
+
+        titleTextView.setText("Music");
 
         buttonTen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.setBackgroundColor(Color.BLUE);
+                view.setBackgroundColor(getResources().getColor(R.color.colorButton));
             }
         });
 
         buttonEasy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.setBackgroundColor(Color.BLUE);
+                view.setBackgroundColor(getResources().getColor(R.color.colorButton));
             }
         });
 
