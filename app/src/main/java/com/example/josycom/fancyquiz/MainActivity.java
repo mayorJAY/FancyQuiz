@@ -2,6 +2,8 @@ package com.example.josycom.fancyquiz;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,5 +61,15 @@ public class MainActivity extends AppCompatActivity {
             quizImage = itemView.findViewById(R.id.quiz_image);
             quizName = itemView.findViewById(R.id.quiz_name);
         }
+    }
+
+    public void displayFragment(){
+        // Instantiate the fragment (SimpleFragment)
+        MainFragment mainFragment = MainFragment.newInstance();
+        // Get the FragmentManager and start a transaction
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        // Add the SimpleFragment
+        fragmentTransaction.add(R.id.fragment_container, mainFragment).addToBackStack(null).commit();
     }
 }

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:textSize="36sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Select Total Number of Questions"
+        android:textSize="24sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="4dp">
+
+        <Button
+            android:id="@+id/ten"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+        <Button
+            android:id="@+id/twenty"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+        <Button
+            android:id="@+id/thirty"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="30"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+        <Button
+            android:id="@+id/forty"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="40"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+        <Button
+            android:id="@+id/fifty"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="50"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Select Difficulty"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="4dp">
+
+        <Button
+            android:id="@+id/any"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="Any"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+        <Button
+            android:id="@+id/easy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Easy"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+        <Button
+            android:id="@+id/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+        <Button
+            android:id="@+id/hard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hard"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/start_quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Quiz"
+        android:layout_marginStart="150dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="36dp"/>
+
+</LinearLayout>
