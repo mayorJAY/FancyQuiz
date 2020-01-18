@@ -1,6 +1,7 @@
 package com.example.josycom.fancyquiz;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -53,9 +54,10 @@ public class MainFragment extends Fragment {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (buttonTen.isPressed() && buttonEasy.isPressed()){
-                    startQuiz();
-                }
+//                if (buttonTen.isPressed() && buttonEasy.isPressed()){
+//                    startQuiz();
+//                }
+                startQuiz();
             }
         });
 
@@ -64,6 +66,8 @@ public class MainFragment extends Fragment {
 
     public void startQuiz(){
         //Launch Quiz Activity
+        Intent questionActivityIntent  = new Intent(getContext(), QuestionActivity.class);
+        startActivity(questionActivityIntent);
     }
 
     public static MainFragment newInstance(){
