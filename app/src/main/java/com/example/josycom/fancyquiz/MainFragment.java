@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,9 +32,9 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        final Button buttonTen = rootView.findViewById(R.id.ten);
-        final Button buttonEasy = rootView.findViewById(R.id.easy);
-        final Button buttonStart = rootView.findViewById(R.id.start_quiz);
+        final MaterialButton buttonTen = rootView.findViewById(R.id.ten);
+        final MaterialButton buttonEasy = rootView.findViewById(R.id.easy);
+        final MaterialButton buttonStart = rootView.findViewById(R.id.start_quiz);
         final TextView titleTextView = rootView.findViewById(R.id.title_tv);
 
         titleTextView.setText("Music");
