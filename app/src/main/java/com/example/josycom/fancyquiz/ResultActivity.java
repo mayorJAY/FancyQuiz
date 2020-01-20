@@ -33,7 +33,7 @@ public class ResultActivity extends AppCompatActivity {
         buttonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(getApplicationContext(), CheckActivity.class));
+                startActivity(new Intent(getApplicationContext(), CheckActivity.class));
             }
         });
     }

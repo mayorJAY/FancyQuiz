@@ -56,9 +56,6 @@ public class MainFragment extends Fragment {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (buttonTen.isPressed() && buttonEasy.isPressed()){
-//                    startQuiz();
-//                }
                 startQuiz();
             }
         });
@@ -67,7 +64,6 @@ public class MainFragment extends Fragment {
     }
 
     public void startQuiz(){
-        //Launch Quiz Activity
         Intent questionActivityIntent  = new Intent(getContext(), QuestionActivity.class);
         startActivity(questionActivityIntent);
     }
