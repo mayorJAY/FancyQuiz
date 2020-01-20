@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
     private View.OnClickListener mOnItemClickListener;
+    QuizCategoryManager.Quiz quiz;
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -19,14 +20,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        holder.quizImage.setImageResource(R.drawable.ic_music_note_24dp);
-        holder.quizName.setText("Music");
+        this.quiz = QuizCategoryManager.getQuizAt(position);
+        holder.quizImage.setImageResource(quiz.getImage());
+        holder.quizName.setText(quiz.getName());
 
     }
 
     @Override
     public int getItemCount() {
-        return 20;
+        return QuizCategoryManager.getQuizCount();
     }
 
     public void setOnItemClickListener(View.OnClickListener onItemClickListener) {

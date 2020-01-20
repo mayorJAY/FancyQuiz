@@ -37,7 +37,8 @@ public class MainFragment extends Fragment {
         final MaterialButton buttonStart = rootView.findViewById(R.id.start_quiz);
         final TextView titleTextView = rootView.findViewById(R.id.title_tv);
 
-        titleTextView.setText("Music");
+        String quizName = this.getArguments().getString("quizName");
+        titleTextView.setText(quizName);
 
         buttonTen.setOnClickListener(new View.OnClickListener() {
             @Override

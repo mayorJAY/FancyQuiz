@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+    QuizCategoryManager.Quiz quiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +32,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
-            //int position = viewHolder.getAdapterPosition();
-            displayFragment();
+            int position = viewHolder.getAdapterPosition();
+            quiz = QuizCategoryManager.getQuizAt(position);
+
+            Bundle bundle = new Bundle();
+            String quizName = quiz.getName();
+            bundle.putString("quizName", quizName);
+            // Instantiate the fragment (MainFragment)
+            MainFragment mainFragment = MainFragment.newInstance();
+            mainFragment.setArguments(bundle);
+            // Get the FragmentManager and start a transaction
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            // Add the MainFragment
+            fragmentTransaction.add(R.id.fragment_container, mainFragment).addToBackStack(null).commit();
         }
     };
-
-    public void displayFragment(){
-        // Instantiate the fragment (SimpleFragment)
-        MainFragment mainFragment = MainFragment.newInstance();
-        // Get the FragmentManager and start a transaction
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        // Add the SimpleFragment
-        fragmentTransaction.add(R.id.fragment_container, mainFragment).addToBackStack(null).commit();
-    }
 }
