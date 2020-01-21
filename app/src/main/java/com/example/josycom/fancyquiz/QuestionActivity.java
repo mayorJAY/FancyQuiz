@@ -61,7 +61,9 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (buttonNext.getText().toString().matches("Submit")){
-                    startActivity(new Intent(getApplicationContext(), ResultActivity.class));
+                    Intent resultIntent = new Intent(getApplicationContext(), ResultActivity.class);
+                    resultIntent.putExtra("score", score);
+                    startActivity(resultIntent);
                 }
                 gotoNextQuestion();
             }
