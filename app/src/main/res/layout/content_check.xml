@@ -15,7 +15,7 @@
         android:id="@+id/check_answers_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/check_answer_view">
+        tools:listitem="@layout/check_view">
 
     </androidx.recyclerview.widget.RecyclerView>
 

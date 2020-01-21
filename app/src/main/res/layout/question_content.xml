@@ -13,7 +13,9 @@
         android:id="@+id/quiz_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="32dp"
         android:text="Your Question goes here"
         android:textColor="#ffffff"
         android:textSize="24sp"
@@ -29,6 +31,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="24dp"
+        app:cardBackgroundColor="#ffffff"
         android:layout_marginRight="24dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
@@ -46,22 +49,22 @@
             <RadioButton
                 android:id="@+id/answer_one"
                 android:layout_marginTop="10dp"
-                android:text="Answer one" />
+                android:text="Answer One" />
 
             <RadioButton
                 android:id="@+id/answer_two"
                 android:layout_marginTop="10dp"
-                android:text="Answer one" />
+                android:text="Answer Two" />
 
             <RadioButton
                 android:id="@+id/answer_three"
                 android:layout_marginTop="10dp"
-                android:text="Answer one" />
+                android:text="Answer Three" />
 
             <RadioButton
                 android:id="@+id/answer_four"
                 android:layout_marginTop="10dp"
-                android:text="Answer one" />
+                android:text="Answer Four" />
         </RadioGroup>
 
     </com.google.android.material.card.MaterialCardView>

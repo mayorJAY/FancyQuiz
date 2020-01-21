@@ -15,8 +15,7 @@ public class Question {
 
     public Question(){}
 
-    public Question(int primaryKey, String category, String question, String answer, String... options){
-        this.primaryKey = primaryKey;
+    public Question(String category, String question, String answer, String... options){
         this.Question = question;
         this.Category = category;
         this.answer = answer;
@@ -24,10 +23,10 @@ public class Question {
     }
 
     @PrimaryKey(autoGenerate = true)
-    private int primaryKey;
-    private String Category;
-    private String Question;
-    private String answer;
+    int primaryKey;
+    String Category;
+    String Question;
+    String answer;
     @TypeConverters(AnswerConverter.class)
     List<String> options = new ArrayList<>();
 }

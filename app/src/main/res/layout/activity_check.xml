@@ -21,7 +21,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/check_content" />
+    <include layout="@layout/content_check" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/done"

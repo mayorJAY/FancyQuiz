@@ -15,7 +15,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new CategoryViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.quiz_category_view, parent, false));
+        return new CategoryViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.category_view, parent, false));
     }
 
     @Override
