@@ -121,7 +121,8 @@ public abstract class QuizDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
             if (quizDao.getAnyQuestion().length < 1){
-                quizDao.put(question, question1, question2, question3, question4, question5, question6, question7, question8, question9);
+                quizDao.put(question, question1, question2, question3, question4, question5,
+                        question6, question7, question8, question9);
             }
             return null;
         }

@@ -9,27 +9,51 @@
     tools:showIn="@layout/activity_question"
     android:background="@drawable/background2">
 
-    <TextView
-        android:id="@+id/quiz_question"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/question_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="32dp"
-        android:text="Your Question goes here"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/question_number"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_gravity="start|center"
+            app:backgroundTint="#D5C1D8"
+            app:cornerRadius="20dp"
+            android:textColor="#870C9C"
+            android:text="1"/>
+
+        <TextView
+            android:id="@+id/quiz_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Your Question goes here"
+            android:textColor="#ffffff"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="240dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="24dp"
         app:cardBackgroundColor="#ffffff"
         android:layout_marginRight="24dp"
@@ -38,7 +62,7 @@
         app:cardPreventCornerOverlap="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/quiz_question">
+        app:layout_constraintTop_toBottomOf="@id/question_layout">
 
 
         <RadioGroup
