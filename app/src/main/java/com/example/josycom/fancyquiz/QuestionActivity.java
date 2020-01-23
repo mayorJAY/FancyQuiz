@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionActivity extends AppCompatActivity {
@@ -28,9 +29,10 @@ public class QuestionActivity extends AppCompatActivity {
     private TextView questionTextView;
     private RadioGroup answers;
     MaterialButton questionNumber;
+    ArrayList<String> chosenAnswers = new ArrayList<>();
 
     private SharedPreferences mPreferences;
-    private String sharedPrefFile = "com.example.josycom.fancyquiz";
+    public static String sharedPrefFile = "com.example.josycom.fancyquiz";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class QuestionActivity extends AppCompatActivity {
 
 
         db = QuizDatabase.getDatabase(this);
-        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+        mPreferences = getSharedPreferences(sharedPrefFile, 0);
 
         toolbar.setTitle("Music");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBar));
@@ -49,33 +51,29 @@ public class QuestionActivity extends AppCompatActivity {
         questions = db.quizDao().getAll();
         questionTextView = findViewById(R.id.quiz_question);
         answers = findViewById(R.id.answers);
+        questionNumber = findViewById(R.id.question_number);
+
         answers.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 if (i == -1)
                     return;
                 final RadioButton checkedRadioButton = radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
-                String[] chosenAnswers = new String[11];
-                for (int x = 0; x <= 10; x++){
-                    chosenAnswers[x] = checkedRadioButton.getText().toString();
-                }
-                for (int x = 0; x <= 10; x++){
-                    SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-                    preferencesEditor.putString("key" + x, chosenAnswers[x]);
-                    preferencesEditor.apply();
-                }
+                chosenAnswers.add(checkedRadioButton.getText().toString());
 
                 if (checkedRadioButton.getText().toString().matches(currentQuestion.answer)){
                     ++score;
                 }
+
+                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                preferencesEditor.clear();
+                preferencesEditor.putInt("chosenAnswer" + "_size", chosenAnswers.size());
+                for (int x = 0; x < chosenAnswers.size(); x++){
+                    preferencesEditor.putString("chosenAnswer" + "_" + x, chosenAnswers.get(x));
+                    preferencesEditor.apply();
+                }
             }
         });
-
-        String[] savedPref = new String[11];
-        for (int y = 0; y <= 10; y++){
-            savedPref[y] = mPreferences.getString("key" + y, "keys");
-        }
-        Log.d("tag", savedPref[1]);
 
         final MaterialButton buttonNext = findViewById(R.id.next);
         buttonNext.setOnClickListener(new View.OnClickListener() {
@@ -89,14 +87,17 @@ public class QuestionActivity extends AppCompatActivity {
                 gotoNextQuestion();
             }
         });
-
-        questionNumber = findViewById(R.id.question_number);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         gotoNextQuestion();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     private void gotoNextQuestion(){

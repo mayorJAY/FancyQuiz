@@ -26,12 +26,13 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/question_number"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="start|center"
             app:backgroundTint="#D5C1D8"
             app:cornerRadius="20dp"
             android:textColor="#870C9C"
+            android:textSize="20sp"
             android:text="1"/>
 
         <TextView
@@ -73,21 +74,25 @@
             <RadioButton
                 android:id="@+id/answer_one"
                 android:layout_marginTop="10dp"
+                android:textSize="20sp"
                 android:text="Answer One" />
 
             <RadioButton
                 android:id="@+id/answer_two"
                 android:layout_marginTop="10dp"
+                android:textSize="20sp"
                 android:text="Answer Two" />
 
             <RadioButton
                 android:id="@+id/answer_three"
                 android:layout_marginTop="10dp"
+                android:textSize="20sp"
                 android:text="Answer Three" />
 
             <RadioButton
                 android:id="@+id/answer_four"
                 android:layout_marginTop="10dp"
+                android:textSize="20sp"
                 android:text="Answer Four" />
         </RadioGroup>
 

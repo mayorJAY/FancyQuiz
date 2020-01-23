@@ -1,6 +1,7 @@
 package com.example.josycom.fancyquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,11 @@ public class CheckActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check);
+        Toolbar toolbar = findViewById(R.id.check_toolbar);
+
+        toolbar.setTitle("Check Answers");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBar));
+        setSupportActionBar(toolbar);
 
         RecyclerView checkRecyclerView = findViewById(R.id.check_answers_rv);
         checkRecyclerView.setHasFixedSize(true);

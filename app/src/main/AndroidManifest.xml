@@ -12,7 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".CheckActivity"></activity>
+        <activity android:name=".CheckActivity"
+            android:parentActivityName=".ResultActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ResultActivity" /></activity>
         <activity
             android:name=".ResultActivity"
             android:parentActivityName=".QuestionActivity">
