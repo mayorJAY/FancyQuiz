@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             int position = viewHolder.getAdapterPosition();
             quiz = QuizCategoryManager.getQuizAt(position);
 
+            // Saves the Quiz name to be passed to the Fragment
             Bundle bundle = new Bundle();
             String quizName = quiz.getName();
             bundle.putString("quizName", quizName);

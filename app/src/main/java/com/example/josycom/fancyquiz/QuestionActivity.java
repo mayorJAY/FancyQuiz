@@ -40,7 +40,6 @@ public class QuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question);
         Toolbar toolbar = findViewById(R.id.question_toolbar);
 
-
         db = QuizDatabase.getDatabase(this);
         mPreferences = getSharedPreferences(sharedPrefFile, 0);
 
@@ -59,18 +58,12 @@ public class QuestionActivity extends AppCompatActivity {
                 if (i == -1)
                     return;
                 final RadioButton checkedRadioButton = radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
+                // Add content of the RadioButton to the ArrayList
                 chosenAnswers.add(checkedRadioButton.getText().toString());
 
                 if (checkedRadioButton.getText().toString().matches(currentQuestion.answer)){
+                    // Track the score
                     ++score;
-                }
-
-                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-                preferencesEditor.clear();
-                preferencesEditor.putInt("chosenAnswer" + "_size", chosenAnswers.size());
-                for (int x = 0; x < chosenAnswers.size(); x++){
-                    preferencesEditor.putString("chosenAnswer" + "_" + x, chosenAnswers.get(x));
-                    preferencesEditor.apply();
                 }
             }
         });
@@ -80,6 +73,17 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (buttonNext.getText().toString().matches("Submit")){
+
+                    // Create a SharedPreference file and add the content of the ArrayList to it
+                    SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                    preferencesEditor.clear();
+                    preferencesEditor.putInt("chosenAnswer" + "_size", chosenAnswers.size());
+                    for (int x = 0; x < chosenAnswers.size(); x++){
+                        preferencesEditor.putString("chosenAnswer" + "_" + x, chosenAnswers.get(x));
+                    }
+                    preferencesEditor.apply();
+
+                    // Start Result Activity passing it the Score Extra
                     Intent resultIntent = new Intent(getApplicationContext(), ResultActivity.class);
                     resultIntent.putExtra("score", score);
                     startActivity(resultIntent);
@@ -95,20 +99,17 @@ public class QuestionActivity extends AppCompatActivity {
         gotoNextQuestion();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
     private void gotoNextQuestion(){
         if (currentNumber >= questions.size()){
             MaterialButton buttonNext = findViewById(R.id.next);
             buttonNext.setText("Submit");
         } else {
+            // Tie the Questions to the TextView
             currentQuestion = questions.get(currentNumber++);
             questionTextView.setText(currentQuestion.Question);
             questionNumber.setText(String.valueOf(currentQuestion.primaryKey));
             answers.clearCheck();
+            // Tie the Options to the RadioButton
             for (int i = 0; i < currentQuestion.options.size(); i++){
                 RadioButton radioButton = (RadioButton) answers.getChildAt(i);
                 radioButton.setText(currentQuestion.options.get(i));

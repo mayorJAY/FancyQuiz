@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes;
 
 class QuizCategoryManager {
 
+    // Create the Quiz object
     public enum Quiz{
         GeneralKnowledge("General knowledge", R.drawable.ic_general_24dp),
         Books("Books", R.drawable.ic_book_24dp),
