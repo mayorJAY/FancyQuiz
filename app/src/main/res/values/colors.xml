@@ -4,5 +4,9 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorButton">#4D60CC</color>
-    <color name="colorAppBar">#FFFFFF</color>
+    <color name="colorAppBarText">#FFFFFF</color>
+    <color name="colorBluePrimary">#1565c0</color>
+    <color name="colorBluePrimaryDark">#003c8f</color>
+    <color name="colorPurplePrimary">#743c94</color>
+    <color name="colorPurplePrimaryDark">#790e8b</color>
 </resources>

@@ -31,7 +31,7 @@ public class ResultActivity extends AppCompatActivity {
         final TextView incorrectAnswer = findViewById(R.id.incorrect_answer_number);
 
         toolbar.setTitle("Result");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBar));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBarText));
         setSupportActionBar(toolbar);
 
         // Get the score saved in the Question Activity

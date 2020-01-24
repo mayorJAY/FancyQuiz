@@ -13,12 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".CheckActivity"
+            android:theme="@style/PurpleTheme.NoActionBar"
             android:parentActivityName=".ResultActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ResultActivity" /></activity>
         <activity
             android:name=".ResultActivity"
+            android:theme="@style/PurpleTheme.NoActionBar"
             android:parentActivityName=".QuestionActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -26,12 +28,14 @@
         </activity>
         <activity
             android:name=".QuestionActivity"
+            android:theme="@style/PurpleTheme.NoActionBar"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/BlueTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

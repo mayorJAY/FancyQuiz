@@ -20,7 +20,7 @@ public class CheckActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.check_toolbar);
 
         toolbar.setTitle("Check Answers");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBar));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBarText));
         setSupportActionBar(toolbar);
 
         RecyclerView checkRecyclerView = findViewById(R.id.check_answers_rv);

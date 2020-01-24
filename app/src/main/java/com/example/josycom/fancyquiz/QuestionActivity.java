@@ -40,7 +40,7 @@ public class QuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question);
         Toolbar toolbar = findViewById(R.id.question_toolbar);
         toolbar.setTitle("Music");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBar));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBarText));
         setSupportActionBar(toolbar);
 
         db = QuizDatabase.getDatabase(this);
