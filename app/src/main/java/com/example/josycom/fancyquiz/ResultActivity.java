@@ -30,19 +30,22 @@ public class ResultActivity extends AppCompatActivity {
         final TextView correctAnswer = findViewById(R.id.correct_answer_number);
         final TextView incorrectAnswer = findViewById(R.id.incorrect_answer_number);
 
+        toolbar.setTitle("Result");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBar));
+        setSupportActionBar(toolbar);
+
+        // Get the score saved in the Question Activity
         score = getIntent().getIntExtra("score", 0);
         db = QuizDatabase.getDatabase(this);
         questions = db.quizDao().getAll();
         int totalQuestion = questions.size();
+
+        // Display the score in different formats (percentage, etc)
         totalQuestionTv.setText(String.valueOf(totalQuestion));
         float scoreToFloat = Float.valueOf(String.valueOf(score)) / Float.valueOf(String.valueOf(totalQuestion)) * 100F;
         scoreNumber.setText( scoreToFloat + "%");
         correctAnswer.setText(score + "/" + totalQuestion);
         incorrectAnswer.setText(totalQuestion - score + "/" + totalQuestion);
-
-        toolbar.setTitle("Result");
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBar));
-        setSupportActionBar(toolbar);
 
         buttonHome.setOnClickListener(new View.OnClickListener() {
             @Override

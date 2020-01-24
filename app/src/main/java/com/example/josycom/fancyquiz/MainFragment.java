@@ -57,16 +57,11 @@ public class MainFragment extends Fragment {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startQuiz();
+                startActivity(new Intent(getContext(), QuestionActivity.class));
             }
         });
 
         return rootView;
-    }
-
-    public void startQuiz(){
-        Intent questionActivityIntent  = new Intent(getContext(), QuestionActivity.class);
-        startActivity(questionActivityIntent);
     }
 
     public static MainFragment newInstance(){

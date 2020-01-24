@@ -45,7 +45,7 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
             holder.question.setText(currentQuestion.Question);
         }
         int size = mPreferences.getInt("chosenAnswer" + "_size", 0);
-        ArrayList<String> savedPref = new ArrayList<>(size);
+        List<String> savedPref = new ArrayList<>(size);
         for (int x = 0; x < size; x++){
             savedPref.add(mPreferences.getString("chosenAnswer" + "_" + x, null));
         }

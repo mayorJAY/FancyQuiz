@@ -31,7 +31,6 @@ public class CheckActivity extends AppCompatActivity {
 
 
         final MaterialButton doneButton = findViewById(R.id.done);
-
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -29,7 +29,7 @@ public class QuestionActivity extends AppCompatActivity {
     private TextView questionTextView;
     private RadioGroup answers;
     MaterialButton questionNumber;
-    ArrayList<String> chosenAnswers = new ArrayList<>();
+    List<String> chosenAnswers = new ArrayList<>();
 
     private SharedPreferences mPreferences;
     public static String sharedPrefFile = "com.example.josycom.fancyquiz";
@@ -39,14 +39,12 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
         Toolbar toolbar = findViewById(R.id.question_toolbar);
-
-        db = QuizDatabase.getDatabase(this);
-        mPreferences = getSharedPreferences(sharedPrefFile, 0);
-
         toolbar.setTitle("Music");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBar));
         setSupportActionBar(toolbar);
 
+        db = QuizDatabase.getDatabase(this);
+        mPreferences = getSharedPreferences(sharedPrefFile, 0);
         questions = db.quizDao().getAll();
         questionTextView = findViewById(R.id.quiz_question);
         answers = findViewById(R.id.answers);
