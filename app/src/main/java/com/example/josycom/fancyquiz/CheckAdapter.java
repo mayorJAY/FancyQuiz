@@ -23,15 +23,11 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
     int currentNumber = 0;
     int currentAnswerNumber = 0;
     private SharedPreferences mPreferences;
-//    int size;
-//    ArrayList<String> savedPref;
 
     CheckAdapter(Context context){
         db = QuizDatabase.getDatabase(context);
         questions = db.quizDao().getAll();
         mPreferences = context.getSharedPreferences(QuestionActivity.sharedPrefFile, 0);
-        //size = mPreferences.getInt("chosenAnswer" + "_size", 0);
-        //savedPref = new ArrayList<>(size);
 
     }
     @NonNull
@@ -49,7 +45,6 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
             holder.question.setText(currentQuestion.Question);
         }
         int size = mPreferences.getInt("chosenAnswer" + "_size", 0);
-        holder.answer2.setText(String.valueOf(size));
         ArrayList<String> savedPref = new ArrayList<>(size);
         for (int x = 0; x < size; x++){
             savedPref.add(mPreferences.getString("chosenAnswer" + "_" + x, null));
@@ -60,6 +55,7 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
             String face = savedPref.get(currentAnswerNumber++);
             holder.answer1.setText(face);
         }
+        holder.answer2.setText(String.valueOf(size));
     }
 
     @Override
