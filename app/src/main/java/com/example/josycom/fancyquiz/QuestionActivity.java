@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +30,10 @@ public class QuestionActivity extends AppCompatActivity {
     private TextView questionTextView;
     private RadioGroup answers;
     MaterialButton questionNumber;
-    List<String> chosenAnswers = new ArrayList<>();
+    ArrayList<ChosenAnswer> mChosenAnswer;
 
     private SharedPreferences mPreferences;
-    public static String sharedPrefFile = "com.example.josycom.fancyquiz";
+    public static String sharedPrefFile = "com.example.josycom.fancyquiz.SHAREDPREF";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class QuestionActivity extends AppCompatActivity {
         questionTextView = findViewById(R.id.quiz_question);
         answers = findViewById(R.id.answers);
         questionNumber = findViewById(R.id.question_number);
+        mChosenAnswer = new ArrayList<>();
 
         answers.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -57,7 +59,7 @@ public class QuestionActivity extends AppCompatActivity {
                     return;
                 final RadioButton checkedRadioButton = radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
                 // Add content of the RadioButton to the ArrayList
-                chosenAnswers.add(checkedRadioButton.getText().toString());
+                mChosenAnswer.add(new ChosenAnswer(checkedRadioButton.getText().toString()));
 
                 if (checkedRadioButton.getText().toString().matches(currentQuestion.answer)){
                     // Track the score
@@ -74,11 +76,9 @@ public class QuestionActivity extends AppCompatActivity {
 
                     // Create a SharedPreference file and add the content of the ArrayList to it
                     SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-                    preferencesEditor.clear();
-                    preferencesEditor.putInt("chosenAnswer" + "_size", chosenAnswers.size());
-                    for (int x = 0; x < chosenAnswers.size(); x++){
-                        preferencesEditor.putString("chosenAnswer" + "_" + x, chosenAnswers.get(x));
-                    }
+                    Gson gson = new Gson();
+                    String json  = gson.toJson(mChosenAnswer);
+                    preferencesEditor.putString("answers", json);
                     preferencesEditor.apply();
 
                     // Start Result Activity passing it the Score Extra

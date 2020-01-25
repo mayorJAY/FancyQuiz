@@ -12,6 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +25,6 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
     List<Question> questions;
     Question currentQuestion;
     int currentNumber = 0;
-    int currentAnswerNumber = 0;
     private SharedPreferences mPreferences;
 
     CheckAdapter(Context context){
@@ -44,18 +47,17 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
             currentQuestion = questions.get(currentNumber++);
             holder.question.setText(currentQuestion.Question);
         }
-        int size = mPreferences.getInt("chosenAnswer" + "_size", 0);
-        List<String> savedPref = new ArrayList<>(size);
-        for (int x = 0; x < size; x++){
-            savedPref.add(mPreferences.getString("chosenAnswer" + "_" + x, null));
+        Gson gson = new Gson();
+        String json = mPreferences.getString("answers", null);
+        Type type = new TypeToken<ArrayList<ChosenAnswer>>(){}.getType();
+        ArrayList<ChosenAnswer> chosenAnswer = gson.fromJson(json, type);
+        ChosenAnswer currentChosenAnswer = null;
+        if (chosenAnswer != null) {
+            currentChosenAnswer = chosenAnswer.get(position);
         }
-        if (currentAnswerNumber >= savedPref.size()){
-            return;
-        } else {
-            String face = savedPref.get(currentAnswerNumber++);
-            holder.answer1.setText(face);
+        if (currentChosenAnswer != null) {
+            holder.answer1.setText(currentChosenAnswer.getAnswer());
         }
-        holder.answer2.setText(String.valueOf(size));
     }
 
     @Override
