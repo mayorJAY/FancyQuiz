@@ -30,8 +30,7 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
     CheckAdapter(Context context){
         db = QuizDatabase.getDatabase(context);
         questions = db.quizDao().getAll();
-        mPreferences = context.getSharedPreferences(QuestionActivity.sharedPrefFile, 0);
-
+        mPreferences =context.getSharedPreferences(QuestionActivity.sharedPrefFile, 0);
     }
     @NonNull
     @Override
@@ -50,10 +49,10 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
         Gson gson = new Gson();
         String json = mPreferences.getString("answers", null);
         Type type = new TypeToken<ArrayList<ChosenAnswer>>(){}.getType();
-        ArrayList<ChosenAnswer> chosenAnswer = gson.fromJson(json, type);
+        ArrayList<ChosenAnswer> mChosenAnswer = gson.fromJson(json, type);
         ChosenAnswer currentChosenAnswer = null;
-        if (chosenAnswer != null) {
-            currentChosenAnswer = chosenAnswer.get(position);
+        if (mChosenAnswer != null) {
+            currentChosenAnswer = mChosenAnswer.get(position);
         }
         if (currentChosenAnswer != null) {
             holder.answer1.setText(currentChosenAnswer.getAnswer());

@@ -92,7 +92,7 @@ public abstract class QuizDatabase extends RoomDatabase {
 
         Question question5 = new Question(
                 GeneralKnowledge.getName(),"What was the black shield in the Nigerian coat of arm stand for?",
-                "Nigeria’s fertile soil","Nigeria’s Unity", "Nigeria’s Freedom", "Nigeria’s Fertile Soil", "Nigeria's Dignity");
+                "Nigeria’s Fertile Soil","Nigeria’s Unity", "Nigeria’s Freedom", "Nigeria’s Fertile Soil", "Nigeria's Dignity");
 
         Question question6 = new Question(GeneralKnowledge.getName(),
                 "Who won the 2018 Russia world cup?",
@@ -111,7 +111,7 @@ public abstract class QuizDatabase extends RoomDatabase {
 
         Question question9 = new Question(
                 GeneralKnowledge.getName(),"The Best player in football after Messi and Ronaldo is",
-                "Mbappe young","Mikel Obi","Neymar Junior",
+                "Mbappe Young","Mikel Obi","Neymar Junior",
                 "Mesut Ozil","Mbappe Young");
 
         PopulateDbAsync(QuizDatabase db){
@@ -121,8 +121,8 @@ public abstract class QuizDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
             if (quizDao.getAnyQuestion().length < 1){
-                quizDao.put(question, question1, question2, question3, question4, question5,
-                        question6, question7, question8, question9);
+            quizDao.put(question, question1, question2, question3, question4, question5,
+                    question6, question7, question8, question9);
             }
             return null;
         }

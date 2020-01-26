@@ -6,15 +6,14 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -31,9 +30,9 @@ public class QuestionActivity extends AppCompatActivity {
     private RadioGroup answers;
     MaterialButton questionNumber;
     ArrayList<ChosenAnswer> mChosenAnswer;
-
     private SharedPreferences mPreferences;
     public static String sharedPrefFile = "com.example.josycom.fancyquiz.SHAREDPREF";
+    private RadioButton mCheckedRadioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +54,21 @@ public class QuestionActivity extends AppCompatActivity {
         answers.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if (i == -1)
-                    return;
-                final RadioButton checkedRadioButton = radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
+                if (i == -1) return;
+                mCheckedRadioButton = radioGroup.findViewById(i);
                 // Add content of the RadioButton to the ArrayList
-                mChosenAnswer.add(new ChosenAnswer(checkedRadioButton.getText().toString()));
+                if (!mChosenAnswer.contains(new ChosenAnswer(mCheckedRadioButton.getText().toString()))){
+                    mChosenAnswer.add(new ChosenAnswer(mCheckedRadioButton.getText().toString()));
+                    Toast toast = Toast.makeText(getApplicationContext(), mCheckedRadioButton.getText().toString(), Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 200);
+                    toast.show();
+                }
 
-                if (checkedRadioButton.getText().toString().matches(currentQuestion.answer)){
+                if (mCheckedRadioButton.getText().toString().matches(currentQuestion.answer)){
                     // Track the score
                     ++score;
                 }
+                answers.clearCheck();
             }
         });
 
@@ -73,13 +77,6 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (buttonNext.getText().toString().matches("Submit")){
-
-                    // Create a SharedPreference file and add the content of the ArrayList to it
-                    SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-                    Gson gson = new Gson();
-                    String json  = gson.toJson(mChosenAnswer);
-                    preferencesEditor.putString("answers", json);
-                    preferencesEditor.apply();
 
                     // Start Result Activity passing it the Score Extra
                     Intent resultIntent = new Intent(getApplicationContext(), ResultActivity.class);
@@ -106,12 +103,17 @@ public class QuestionActivity extends AppCompatActivity {
             currentQuestion = questions.get(currentNumber++);
             questionTextView.setText(currentQuestion.Question);
             questionNumber.setText(String.valueOf(currentQuestion.primaryKey));
-            answers.clearCheck();
             // Tie the Options to the RadioButton
             for (int i = 0; i < currentQuestion.options.size(); i++){
                 RadioButton radioButton = (RadioButton) answers.getChildAt(i);
                 radioButton.setText(currentQuestion.options.get(i));
             }
         }
+        // Create a SharedPreference file and add the content of the ArrayList to it
+        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+        Gson gson = new Gson();
+        String json  = gson.toJson(mChosenAnswer);
+        preferencesEditor.putString("answers", json);
+        preferencesEditor.apply();
     }
 }
