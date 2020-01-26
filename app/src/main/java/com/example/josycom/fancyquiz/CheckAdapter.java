@@ -2,6 +2,7 @@ package com.example.josycom.fancyquiz;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,14 +22,12 @@ import java.util.List;
 
 public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHolder> {
 
-    QuizDatabase db;
-    List<Question> questions;
-    Question currentQuestion;
-    int currentNumber = 0;
+    private List<Question> questions;
+    private int currentNumber = 0;
     private SharedPreferences mPreferences;
 
     CheckAdapter(Context context){
-        db = QuizDatabase.getDatabase(context);
+        QuizDatabase db = QuizDatabase.getDatabase(context);
         questions = db.quizDao().getAll();
         mPreferences =context.getSharedPreferences(QuestionActivity.sharedPrefFile, 0);
     }
@@ -43,19 +42,29 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
         if (currentNumber >= questions.size()){
             return;
         } else {
-            currentQuestion = questions.get(currentNumber++);
+            Question currentQuestion = questions.get(currentNumber++);
             holder.question.setText(currentQuestion.Question);
         }
         Gson gson = new Gson();
         String json = mPreferences.getString("answers", null);
         Type type = new TypeToken<ArrayList<ChosenAnswer>>(){}.getType();
-        ArrayList<ChosenAnswer> mChosenAnswer = gson.fromJson(json, type);
+        ArrayList<ChosenAnswer> chosenAnswers = gson.fromJson(json, type);
         ChosenAnswer currentChosenAnswer = null;
-        if (mChosenAnswer != null) {
-            currentChosenAnswer = mChosenAnswer.get(position);
+        Question theCurrentQuestion = null;
+        if (chosenAnswers != null) {
+            currentChosenAnswer = chosenAnswers.get(position);
+            theCurrentQuestion = questions.get(position);
         }
         if (currentChosenAnswer != null) {
             holder.answer1.setText(currentChosenAnswer.getAnswer());
+        }
+        if (theCurrentQuestion != null) {
+            if (currentChosenAnswer != null) {
+                if (!currentChosenAnswer.getAnswer().equals(theCurrentQuestion.answer)){
+                    holder.answer1.setTextColor(Color.RED);
+                    holder.answer2.setText("Answer: " + theCurrentQuestion.answer);
+                }
+            }
         }
     }
 

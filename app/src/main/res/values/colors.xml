@@ -9,4 +9,6 @@
     <color name="colorBluePrimaryDark">#003c8f</color>
     <color name="colorPurplePrimary">#743c94</color>
     <color name="colorPurplePrimaryDark">#790e8b</color>
+    <color name="colorTextRed">#DA2517</color>
+    <color name="colorTextGreen">#218B24</color>
 </resources>
