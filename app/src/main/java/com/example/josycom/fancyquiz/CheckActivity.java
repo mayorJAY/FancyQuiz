@@ -22,6 +22,7 @@ public class CheckActivity extends AppCompatActivity {
         toolbar.setTitle("Check Answers");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBarText));
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         RecyclerView checkRecyclerView = findViewById(R.id.check_answers_rv);
         checkRecyclerView.setHasFixedSize(true);

@@ -1,13 +1,13 @@
 package com.example.josycom.fancyquiz;
 
-public class ChosenAnswer {
+class ChosenAnswer {
     private String answer;
 
-    public ChosenAnswer(String answer){
+    ChosenAnswer(String answer){
         this.answer = answer;
     }
 
-    public String getAnswer(){
+    String getAnswer(){
         return answer;
     }
 }

@@ -5,7 +5,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,6 +32,7 @@ public class ResultActivity extends AppCompatActivity {
         toolbar.setTitle("Result");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBarText));
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Get the score saved in the Question Activity
         score = getIntent().getIntExtra("score", 0);

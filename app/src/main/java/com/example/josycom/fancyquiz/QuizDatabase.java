@@ -43,7 +43,7 @@ public abstract class QuizDatabase extends RoomDatabase {
 
     private static QuizDatabase INSTANCE;
 
-    public static QuizDatabase getDatabase(final Context context){
+    static QuizDatabase getDatabase(final Context context){
         if (INSTANCE == null){
             synchronized (QuizDatabase.class){
                 if (INSTANCE == null){

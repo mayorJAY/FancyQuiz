@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-    QuizCategoryManager.Quiz quiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
             int position = viewHolder.getAdapterPosition();
-            quiz = QuizCategoryManager.getQuizAt(position);
+            QuizCategoryManager.Quiz quiz = QuizCategoryManager.getQuizAt(position);
 
             // Saves the Quiz name to be passed to the Fragment
             Bundle bundle = new Bundle();

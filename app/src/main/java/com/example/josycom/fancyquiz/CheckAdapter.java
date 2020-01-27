@@ -3,8 +3,6 @@ package com.example.josycom.fancyquiz;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,11 +71,11 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
         return questions.size();
     }
 
-    public class CheckViewHolder extends RecyclerView.ViewHolder{
+    class CheckViewHolder extends RecyclerView.ViewHolder{
         TextView question, answer1, answer2;
 
 
-        public CheckViewHolder(@NonNull View itemView) {
+        CheckViewHolder(@NonNull View itemView) {
             super(itemView);
 
             question = itemView.findViewById(R.id.question_tv);

@@ -21,15 +21,14 @@ import java.util.List;
 
 public class QuestionActivity extends AppCompatActivity {
 
-    QuizDatabase db;
-    List<Question> questions;
-    Question currentQuestion;
+    private List<Question> questions;
+    private Question currentQuestion;
     int currentNumber = 0;
     int score = 0;
     private TextView questionTextView;
     private RadioGroup answers;
-    MaterialButton questionNumber;
-    ArrayList<ChosenAnswer> mChosenAnswer;
+    private MaterialButton questionNumber;
+    private ArrayList<ChosenAnswer> mChosenAnswer;
     private SharedPreferences mPreferences;
     public static String sharedPrefFile = "com.example.josycom.fancyquiz.SHAREDPREF";
     private RadioButton mCheckedRadioButton;
@@ -42,8 +41,9 @@ public class QuestionActivity extends AppCompatActivity {
         toolbar.setTitle("Music");
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBarText));
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        db = QuizDatabase.getDatabase(this);
+        QuizDatabase db = QuizDatabase.getDatabase(this);
         mPreferences = getSharedPreferences(sharedPrefFile, 0);
         questions = db.quizDao().getAll();
         questionTextView = findViewById(R.id.quiz_question);
@@ -83,6 +83,13 @@ public class QuestionActivity extends AppCompatActivity {
                     resultIntent.putExtra("score", score);
                     startActivity(resultIntent);
                 }
+                // Create a SharedPreference file and add the content of the ArrayList to it
+                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+                Gson gson = new Gson();
+                String json  = gson.toJson(mChosenAnswer);
+                preferencesEditor.putString("answers", json);
+                preferencesEditor.apply();
+
                 gotoNextQuestion();
             }
         });
@@ -109,11 +116,5 @@ public class QuestionActivity extends AppCompatActivity {
                 radioButton.setText(currentQuestion.options.get(i));
             }
         }
-        // Create a SharedPreference file and add the content of the ArrayList to it
-        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-        Gson gson = new Gson();
-        String json  = gson.toJson(mChosenAnswer);
-        preferencesEditor.putString("answers", json);
-        preferencesEditor.apply();
     }
 }

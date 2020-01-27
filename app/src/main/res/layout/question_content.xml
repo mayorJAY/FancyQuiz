@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
+    tools:context=".QuestionActivity"
     tools:showIn="@layout/activity_question"
     android:background="@drawable/background2">
 
@@ -16,7 +16,7 @@
         android:layout_gravity="center"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:orientation="horizontal"
@@ -54,7 +54,7 @@
         android:layout_height="240dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         app:cardBackgroundColor="#ffffff"
         android:layout_marginRight="24dp"
