@@ -45,7 +45,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         QuizDatabase db = QuizDatabase.getDatabase(this);
         mPreferences = getSharedPreferences(sharedPrefFile, 0);
-        questions = db.quizDao().getAll();
+        //questions = db.quizDao().getAllQuestions();
         questionTextView = findViewById(R.id.quiz_question);
         answers = findViewById(R.id.answers);
         questionNumber = findViewById(R.id.question_number);
