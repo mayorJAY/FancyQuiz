@@ -2,12 +2,12 @@ package com.example.josycom.fancyquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class QuestionActivity extends AppCompatActivity {
 
-    private List<Question> questions;
+    private List<Question> mAllQuestions;
     private Question currentQuestion;
     int currentNumber = 0;
     int score = 0;
@@ -43,71 +43,70 @@ public class QuestionActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        QuizDatabase db = QuizDatabase.getDatabase(this);
         mPreferences = getSharedPreferences(sharedPrefFile, 0);
-        //questions = db.quizDao().getAllQuestions();
         questionTextView = findViewById(R.id.quiz_question);
         answers = findViewById(R.id.answers);
         questionNumber = findViewById(R.id.question_number);
         mChosenAnswer = new ArrayList<>();
 
-        answers.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if (i == -1) return;
-                mCheckedRadioButton = radioGroup.findViewById(i);
-                // Add content of the RadioButton to the ArrayList
-                if (!mChosenAnswer.contains(new ChosenAnswer(mCheckedRadioButton.getText().toString()))){
-                    mChosenAnswer.add(new ChosenAnswer(mCheckedRadioButton.getText().toString()));
-                    Toast toast = Toast.makeText(getApplicationContext(), mCheckedRadioButton.getText().toString(), Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 200);
-                    toast.show();
-                }
-
-                if (mCheckedRadioButton.getText().toString().matches(currentQuestion.answer)){
-                    // Track the score
-                    ++score;
-                }
-                answers.clearCheck();
+        answers.setOnCheckedChangeListener((radioGroup, i) -> {
+            if (i == -1) return;
+            mCheckedRadioButton = radioGroup.findViewById(i);
+            // Add content of the RadioButton to the ArrayList
+            if (!mChosenAnswer.contains(new ChosenAnswer(mCheckedRadioButton.getText().toString()))){
+                mChosenAnswer.add(new ChosenAnswer(mCheckedRadioButton.getText().toString()));
+                Toast toast = Toast.makeText(getApplicationContext(), mCheckedRadioButton.getText().toString(), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 200);
+                toast.show();
             }
+
+            if (mCheckedRadioButton.getText().toString().matches(currentQuestion.answer)){
+                // Track the score
+                ++score;
+            }
+            answers.clearCheck();
         });
 
         final MaterialButton buttonNext = findViewById(R.id.next);
-        buttonNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (buttonNext.getText().toString().matches("Submit")){
+        buttonNext.setOnClickListener(v -> {
+            if (buttonNext.getText().toString().matches("Submit")){
 
-                    // Start Result Activity passing it the Score Extra
-                    Intent resultIntent = new Intent(getApplicationContext(), ResultActivity.class);
-                    resultIntent.putExtra("score", score);
-                    startActivity(resultIntent);
-                }
-                // Create a SharedPreference file and add the content of the ArrayList to it
-                SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-                Gson gson = new Gson();
-                String json  = gson.toJson(mChosenAnswer);
-                preferencesEditor.putString("answers", json);
-                preferencesEditor.apply();
-
-                gotoNextQuestion();
+                // Start Result Activity passing it the Score Extra
+                Intent resultIntent = new Intent(getApplicationContext(), ResultActivity.class);
+                resultIntent.putExtra("score", score);
+                startActivity(resultIntent);
             }
+            // Create a SharedPreference file and add the content of the ArrayList to it
+            SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+            Gson gson = new Gson();
+            String json  = gson.toJson(mChosenAnswer);
+            preferencesEditor.putString("answers", json);
+            preferencesEditor.apply();
+
+            gotoNextQuestion();
         });
+
+        QuestionActivityViewModel questionActivityViewModel = new ViewModelProvider(this).get(QuestionActivityViewModel.class);
+        questionActivityViewModel.getAllQuestions().observe(this, this::setQuestions);
+    }
+
+    void setQuestions(List<Question> questions){
+        mAllQuestions = questions;
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        gotoNextQuestion();
+        //gotoNextQuestion();
     }
 
     private void gotoNextQuestion(){
-        if (currentNumber >= questions.size()){
+        if (currentNumber >= mAllQuestions.size()){
             MaterialButton buttonNext = findViewById(R.id.next);
             buttonNext.setText("Submit");
         } else {
             // Tie the Questions to the TextView
-            currentQuestion = questions.get(currentNumber++);
+            currentQuestion = mAllQuestions.get(currentNumber++);
             questionTextView.setText(currentQuestion.Question);
             questionNumber.setText(String.valueOf(currentQuestion.primaryKey));
             // Tie the Options to the RadioButton

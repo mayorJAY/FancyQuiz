@@ -1,7 +1,6 @@
 package com.example.josycom.fancyquiz;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -14,7 +13,6 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -40,7 +38,7 @@ interface QuizDao{
 }
 
 
-@Database(entities = Question.class, version = 1)
+@Database(entities = Question.class, version = 1, exportSchema = false)
 public abstract class QuizDatabase extends RoomDatabase {
 
     public abstract QuizDao quizDao();

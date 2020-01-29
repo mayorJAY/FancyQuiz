@@ -8,12 +8,12 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-public class QuizViewModel extends AndroidViewModel {
+public class ResultActivityViewModel extends AndroidViewModel {
     private QuizRepository mQuizRepository;
     private LiveData<List<Question>> mAllQuestions;
 
 
-    public QuizViewModel(@NonNull Application application) {
+    public ResultActivityViewModel(@NonNull Application application) {
         super(application);
         mQuizRepository = new QuizRepository(application);
         mAllQuestions = mQuizRepository.getAllQuestions();

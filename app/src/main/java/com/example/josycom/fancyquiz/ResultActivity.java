@@ -2,10 +2,10 @@ package com.example.josycom.fancyquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
@@ -14,8 +14,7 @@ import java.util.List;
 
 public class ResultActivity extends AppCompatActivity {
     int score;
-    QuizDatabase db;
-    List<Question> questions;
+    private List<Question> mQuestions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +33,12 @@ public class ResultActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        ResultActivityViewModel resultActivityViewModel = new ViewModelProvider(this).get(ResultActivityViewModel.class);
+        resultActivityViewModel.getAllQuestions().observe(this, this::setQuestions);
+
         // Get the score saved in the Question Activity
         score = getIntent().getIntExtra("score", 0);
-        db = QuizDatabase.getDatabase(this);
-        questions = db.quizDao().getAll();
-        int totalQuestion = questions.size();
+        int totalQuestion = mQuestions.size();
 
         // Display the score in different formats (percentage, etc)
         totalQuestionTv.setText(String.valueOf(totalQuestion));
@@ -47,18 +47,12 @@ public class ResultActivity extends AppCompatActivity {
         correctAnswer.setText(score + "/" + totalQuestion);
         incorrectAnswer.setText(totalQuestion - score + "/" + totalQuestion);
 
-        buttonHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            }
-        });
+        buttonHome.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
 
-        buttonCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), CheckActivity.class));
-            }
-        });
+        buttonCheck.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), CheckActivity.class)));
+    }
+
+    void setQuestions(List<Question> questions){
+        mQuestions = questions;
     }
 }

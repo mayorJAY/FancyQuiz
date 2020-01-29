@@ -20,14 +20,12 @@ import java.util.List;
 
 public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHolder> {
 
-    private List<Question> questions;
+    private List<Question> mQuestions;
     private int currentNumber = 0;
     private SharedPreferences mPreferences;
 
     CheckAdapter(Context context){
-        QuizDatabase db = QuizDatabase.getDatabase(context);
-        questions = db.quizDao().getAll();
-        mPreferences =context.getSharedPreferences(QuestionActivity.sharedPrefFile, 0);
+        mPreferences = context.getSharedPreferences(QuestionActivity.sharedPrefFile, 0);
     }
     @NonNull
     @Override
@@ -37,10 +35,10 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
 
     @Override
     public void onBindViewHolder(@NonNull CheckAdapter.CheckViewHolder holder, int position) {
-        if (currentNumber >= questions.size()){
+        if (currentNumber >= mQuestions.size()){
             return;
         } else {
-            Question currentQuestion = questions.get(currentNumber++);
+            Question currentQuestion = mQuestions.get(currentNumber++);
             holder.question.setText(currentQuestion.Question);
         }
         Gson gson = new Gson();
@@ -51,7 +49,7 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
         Question theCurrentQuestion = null;
         if (chosenAnswers != null) {
             currentChosenAnswer = chosenAnswers.get(position);
-            theCurrentQuestion = questions.get(position);
+            theCurrentQuestion = mQuestions.get(position);
         }
         if (currentChosenAnswer != null) {
             holder.answer1.setText(currentChosenAnswer.getAnswer());
@@ -66,9 +64,14 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
         }
     }
 
+    void setQuestions(List<Question> questions){
+        mQuestions = questions;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
-        return questions.size();
+        return mQuestions.size();
     }
 
     class CheckViewHolder extends RecyclerView.ViewHolder{
