@@ -8,7 +8,7 @@ import java.util.List;
 
 class QuizRepository {
     private QuizDao mQuizDao;
-    private LiveData<List<Question>> mAllQuestions;
+    private List<Question> mAllQuestions;
 
 
     QuizRepository(Application application){
@@ -17,7 +17,7 @@ class QuizRepository {
         mAllQuestions = mQuizDao.getAllQuestions();
     }
 
-    LiveData<List<Question>> getAllQuestions(){
+    List<Question> getAllQuestions(){
         return mAllQuestions;
     }
 

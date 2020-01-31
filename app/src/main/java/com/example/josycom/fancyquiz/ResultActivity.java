@@ -1,7 +1,9 @@
 package com.example.josycom.fancyquiz;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -10,11 +12,14 @@ import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResultActivity extends AppCompatActivity {
     int score;
     private List<Question> mQuestions;
+    private ResultActivityViewModel mResultActivityViewModel;
+    private int mTotalQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +37,21 @@ public class ResultActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorAppBarText));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //mQuestions = new ArrayList<>();
 
-        ResultActivityViewModel resultActivityViewModel = new ViewModelProvider(this).get(ResultActivityViewModel.class);
-        resultActivityViewModel.getAllQuestions().observe(this, this::setQuestions);
+        mResultActivityViewModel = new ViewModelProvider(this).get(ResultActivityViewModel.class);
+        mQuestions = mResultActivityViewModel.getAllQuestions();
 
         // Get the score saved in the Question Activity
         score = getIntent().getIntExtra("score", 0);
-        int totalQuestion = mQuestions.size();
+        mTotalQuestion = mQuestions.size();
 
         // Display the score in different formats (percentage, etc)
-        totalQuestionTv.setText(String.valueOf(totalQuestion));
-        float scoreToFloat = Float.valueOf(String.valueOf(score)) / Float.valueOf(String.valueOf(totalQuestion)) * 100F;
+        totalQuestionTv.setText(String.valueOf(mTotalQuestion));
+        float scoreToFloat = Float.valueOf(String.valueOf(score)) / Float.valueOf(String.valueOf(mTotalQuestion)) * 100F;
         scoreNumber.setText( scoreToFloat + "%");
-        correctAnswer.setText(score + "/" + totalQuestion);
-        incorrectAnswer.setText(totalQuestion - score + "/" + totalQuestion);
+        correctAnswer.setText(score + "/" + mTotalQuestion);
+        incorrectAnswer.setText(mTotalQuestion - score + "/" + mTotalQuestion);
 
         buttonHome.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));
 

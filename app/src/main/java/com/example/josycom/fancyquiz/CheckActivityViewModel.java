@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CheckActivityViewModel extends AndroidViewModel {
     private QuizRepository mQuizRepository;
-    private LiveData<List<Question>> mAllQuestions;
+    private List<Question> mAllQuestions;
 
 
     public CheckActivityViewModel(@NonNull Application application) {
@@ -19,7 +19,7 @@ public class CheckActivityViewModel extends AndroidViewModel {
         mAllQuestions = mQuizRepository.getAllQuestions();
     }
 
-    LiveData<List<Question>> getAllQuestions(){
+    List<Question> getAllQuestions(){
         return mAllQuestions;
     }
 

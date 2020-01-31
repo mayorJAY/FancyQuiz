@@ -25,7 +25,7 @@ interface QuizDao{
     List<Question> getAllQuestionsByCategory(String quizName);
 
     @Query("SELECT * from question")
-    LiveData<List<Question>> getAllQuestions();
+    List<Question> getAllQuestions();
 
     @Query("DELETE FROM question")
     void deleteAll();
@@ -55,7 +55,7 @@ public abstract class QuizDatabase extends RoomDatabase {
                             QuizDatabase.class, "quiz_database")
                             //.fallbackToDestructiveMigration()
                             .addCallback(sRoomDatabaseCallback)
-                            //.allowMainThreadQueries()
+                            .allowMainThreadQueries()
                             .build();
                 }
             }

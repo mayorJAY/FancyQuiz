@@ -32,7 +32,7 @@ public class CheckActivity extends AppCompatActivity {
         checkRecyclerView.setAdapter(checkAdapter);
 
         CheckActivityViewModel checkActivityViewModel = new ViewModelProvider(this).get(CheckActivityViewModel.class);
-        checkActivityViewModel.getAllQuestions().observe(this, checkAdapter::setQuestions);
+        checkAdapter.setQuestions(checkActivityViewModel.getAllQuestions());
 
         final MaterialButton doneButton = findViewById(R.id.done);
         doneButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), MainActivity.class)));

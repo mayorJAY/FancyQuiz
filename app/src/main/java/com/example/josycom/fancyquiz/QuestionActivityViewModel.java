@@ -1,7 +1,6 @@
 package com.example.josycom.fancyquiz;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -10,7 +9,8 @@ import java.util.List;
 
 public class QuestionActivityViewModel extends AndroidViewModel {
     private QuizRepository mQuizRepository;
-    private LiveData<List<Question>> mAllQuestions;
+    private List<Question> mAllQuestions;
+    private List<Question> mQuestions;
 
 
     public QuestionActivityViewModel(@NonNull Application application) {
@@ -19,11 +19,16 @@ public class QuestionActivityViewModel extends AndroidViewModel {
         mAllQuestions = mQuizRepository.getAllQuestions();
     }
 
-    LiveData<List<Question>> getAllQuestions(){
+    List<Question> getAllQuestions() {
         return mAllQuestions;
     }
 
     void put(Question... questions){
         mQuizRepository.put(questions);
     }
+
+    void setQuestions(List<Question> questions){
+        mQuestions = questions;
+    }
+
 }

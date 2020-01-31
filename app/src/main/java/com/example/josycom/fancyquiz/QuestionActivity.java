@@ -2,6 +2,7 @@ package com.example.josycom.fancyquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -32,6 +33,7 @@ public class QuestionActivity extends AppCompatActivity {
     private SharedPreferences mPreferences;
     public static String sharedPrefFile = "com.example.josycom.fancyquiz.SHAREDPREF";
     private RadioButton mCheckedRadioButton;
+    private QuestionActivityViewModel mQuestionActivityViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,9 @@ public class QuestionActivity extends AppCompatActivity {
         answers = findViewById(R.id.answers);
         questionNumber = findViewById(R.id.question_number);
         mChosenAnswer = new ArrayList<>();
+
+        mQuestionActivityViewModel = new QuestionActivityViewModel(getApplication());
+        mAllQuestions = mQuestionActivityViewModel.getAllQuestions();
 
         answers.setOnCheckedChangeListener((radioGroup, i) -> {
             if (i == -1) return;
@@ -85,19 +90,16 @@ public class QuestionActivity extends AppCompatActivity {
 
             gotoNextQuestion();
         });
-
-        QuestionActivityViewModel questionActivityViewModel = new ViewModelProvider(this).get(QuestionActivityViewModel.class);
-        questionActivityViewModel.getAllQuestions().observe(this, this::setQuestions);
     }
 
-    void setQuestions(List<Question> questions){
-        mAllQuestions = questions;
-    }
+//    void setQuestions(List<Question> questions){
+//        mAllQuestions = questions;
+//    }
 
     @Override
     protected void onStart() {
         super.onStart();
-        //gotoNextQuestion();
+        gotoNextQuestion();
     }
 
     private void gotoNextQuestion(){
