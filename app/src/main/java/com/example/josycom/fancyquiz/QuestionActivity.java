@@ -2,8 +2,6 @@ package com.example.josycom.fancyquiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -91,10 +89,6 @@ public class QuestionActivity extends AppCompatActivity {
             gotoNextQuestion();
         });
     }
-
-//    void setQuestions(List<Question> questions){
-//        mAllQuestions = questions;
-//    }
 
     @Override
     protected void onStart() {

@@ -2,8 +2,6 @@ package com.example.josycom.fancyquiz;
 
 import android.app.Application;
 
-import androidx.lifecycle.LiveData;
-
 import java.util.List;
 
 class QuizRepository {

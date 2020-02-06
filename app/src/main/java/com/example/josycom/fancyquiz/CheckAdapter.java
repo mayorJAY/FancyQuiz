@@ -66,7 +66,6 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckAdapter.CheckViewHol
 
     void setQuestions(List<Question> questions){
         mQuestions = questions;
-        notifyDataSetChanged();
     }
 
     @Override
